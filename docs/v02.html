@@ -45,7 +45,7 @@
                 var article = document.createElement('li');
                 publish_date = new Date(content.pub_date);
                 document.getElementById("article_list").appendChild(article);
-                article.innerHTML = `<h4>{content.headline.main}</h4> <p> <span class="datestamp"> ${publish_date.toDateString()} </span> <br/> {content.snippet} <br /> <a href="{content.web_url}">Full article</a></p>`;
+                headline.innerHTML = `<h4>{content.headline.main}</h4>`;
             }
             function loadMore(){
                 page++;
