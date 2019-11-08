@@ -40,11 +40,11 @@
                 document.getElementById('topic').innerHTML = parameters.q;
                 document.getElementById('count').innerHTML = article_count;
             }
+              }
             function addToPage(content) {
-                // get headline and snipped and add them to the page
-                var article = document.createElement('li');
-                publish_date = new Date(content.pub_date);
-                document.getElementById("article_list").appendChild(article);
+                // for now, just get the headline and add it to the page
+                var headline = document.createElement('li');
+                document.getElementById("article_list").appendChild(headline);
                 headline.innerHTML = `<h4>{content.headline.main}</h4>`;
             }
             function loadMore(){
