@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>Nadir's INF1339 API Project</title>
+        <script>
+            var nyt_api = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
+            var api_key = 'z0HkOAz56Sbk7iQetLIx3qhJolzME7yg';
+            var page = 0;
+            var parameters = {'q': 'trump impeachment', 'page': page, 'api-key': api_key};
+            var article_count = 0;
+            function setup() {
+                 // don't draw anything
+                 noCanvas();
+                 // call the API and display the retrieved data
+                 var endpt = buildEndpoint(nyt_api, parameters)
+                 loadJSON(endpt, displayData);
+        
+            function buildEndpoint(url, params) {
+                // build the URL endpoint programmatically to make it easier to play with API calls
+                //expect params to be an object
+                var endpoint = url + '?';
+                var param_pairs = Object.entries(params);
+                // add the first parameter pair to URL
+                endpoint += `{param_pairs[0][0]}={param_pairs[0][1]}`;
+                // add any additional parameter pairs to URL
+                for (let [k, v] of param_pairs.slice(1)) {
+                    endpoint += `&{k}={v}`;
+                }
+                return(endpoint);
+            }
+            function displayData(data) {
+                // add article information from the API response to the page
+                var articles = data.response.docs;
+                for (var i=0; i < articles.length; i++) {
+                    article_count++;
+                    addToPage(articles[i]);
+                }
+                // pop some metadata in up top
+                document.getElementById('topic').innerHTML = parameters.q;
+                document.getElementById('count').innerHTML = article_count;
+            }
+            function addToPage(content) {
+                // for now, just get the headline and add it to the page
+                var headline = document.createElement('li');
+                document.getElementById("article_list").appendChild(headline);
+                headline.innerHTML = `<h4>{content.headline.main}</h4>`;
+            }
+        </script>
+    <head>
+    <body>
+        <head>
+    <body>
+        <h1>Nadir's New York Times API Project</h1>
+        
+        
+    </body>
+</html>
