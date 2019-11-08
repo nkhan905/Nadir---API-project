@@ -22,10 +22,10 @@
                 var endpoint = url + '?';
                 var param_pairs = Object.entries(params);
                 // add the first parameter pair to URL
-                endpoint += `${param_pairs[0][0]}=${param_pairs[0][1]}`;
+                endpoint += `{param_pairs[0][0]}={param_pairs[0][1]}`;
                 // add any additional parameter pairs to URL
                 for (let [k, v] of param_pairs.slice(1)) {
-                    endpoint += `&${k}=${v}`;
+                    endpoint += `{k}={v}`;
                 }
                 return(endpoint);
             }
