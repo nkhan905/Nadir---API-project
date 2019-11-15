@@ -2,7 +2,7 @@
     <head>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
 
-        <title>Nadir's INF1339 API Project</title>
+        <title>New York Times API Project tracking Trump Impeachment</title>
         <script>
             var nyt_api = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
             var api_key = 'z0HkOAz56Sbk7iQetLIx3qhJolzME7yg';
@@ -22,10 +22,10 @@
                 var endpoint = url + '?';
                 var param_pairs = Object.entries(params);
                 // add the first parameter pair to URL
-                endpoint += `{param_pairs[0][0]}={param_pairs[0][1]}`;
+                endpoint += `${param_pairs[0][0]}=${param_pairs[0][1]}`;
                 // add any additional parameter pairs to URL
                 for (let [k, v] of param_pairs.slice(1)) {
-                    endpoint += `{k}={v}`;
+                    endpoint += `&${k}=${v}`;
                 }
                 return(endpoint);
             }
@@ -40,12 +40,12 @@
                 document.getElementById('topic').innerHTML = parameters.q;
                 document.getElementById('count').innerHTML = article_count;
             }
-              }
             function addToPage(content) {
-                // for now, just get the headline and add it to the page
-                var headline = document.createElement('li');
-                document.getElementById("article_list").appendChild(headline);
-                headline.innerHTML = `<h4>{content.headline.main}</h4>`;
+                // get headline and snipped and add them to the page
+                var article = document.createElement('li');
+                publish_date = new Date(content.pub_date);
+                document.getElementById("article_list").appendChild(article);
+                article.innerHTML = `<h4>${content.headline.main}</h4> <p> <span class="datestamp"> ${publish_date.toDateString()} </span> <br/> ${content.snippet} <br /> <a href="${content.web_url}">Full article</a></p>`;
             }
             function loadMore(){
                 page++;
@@ -56,10 +56,10 @@
         </script>
     <head>
     <body>
-        <h1>Nadir's New York Times API Project</h1>
-   
+        <h1>New York Times API Project tracking Trump Impeachment</h1>
+        
         <ul id="article_list">
         </ul>
-        <button onClick="loadMore()">Next</button>
+        <button onClick="loadMore()">load more</button>
     </body>
 </html>
